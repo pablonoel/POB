@@ -260,30 +260,11 @@ ul,ol
 // Global elements
 // ----------------------------------------------------------------------------
 
-header.global
-  nav
-    @extend %centered
-footer.global
-  nav
-    @extend %centered
-    padding: 100px 0
-    h3
-      margin: 30px 0
-    ul
-      @extend %col2
-      li
-        font-size: 2em
-        margin: 5px 0
-        @media only screen and (max-width : 1000px)
-          font-size: 1.5em
-        @media only screen and (max-width : 600px)
-          font-size: 1.2em
-
 // ----------------------------------------------------------------------------
 // Home
 // ----------------------------------------------------------------------------
 .home
-  section
+  section, footer
     @extend %block
     padding: 30px
     article
@@ -305,6 +286,9 @@ footer.global
           font-size: 1.2em
   .video
     background: #000
+    header
+      @extend %centered
+      margin-bottom: 30px
     .player
       @extend %ratio
       @extend .sixteenByNine
@@ -332,3 +316,17 @@ footer.global
           font-size: 1.5em
   .donate
     background: #888
+  .map
+    nav
+      @extend %centered
+      h3
+        margin: 30px 0
+      ul
+        @extend %col2
+        li
+          font-size: 2em
+          margin: 5px 0
+          @media only screen and (max-width : 1000px)
+            font-size: 1.5em
+          @media only screen and (max-width : 600px)
+            font-size: 1.2em
