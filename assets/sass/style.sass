@@ -1,0 +1,334 @@
+// the shape of things to come
+
+@import "compass/reset"
+@import "compass/css3"
+
+// ----------------------------------------------------------------------------
+// Mixins
+// ----------------------------------------------------------------------------
+
+@mixin border-box
+  -webkit-box-sizing : border-box
+  -moz-box-sizing : border-box
+  -ms-box-sizing : border-box
+  -o-box-sizing : border-box
+  box-sizing : border-box
+
+@mixin border-radius($radius)
+  -webkit-border-radius : $radius
+  -moz-border-radius : $radius
+  -ms-border-radius : $radius
+  -o-border-radius : $radius
+  border-radius : $radius
+
+@mixin box-shadow($box-shadows)
+  -webkit-box-shadow : $box-shadows
+  -moz-box-shadow : $box-shadows
+  -ms-box-shadow : $box-shadows
+  -o-box-shadow : $box-shadows
+  box-shadow : $box-shadows
+
+@mixin text-shadow($text-shadows)
+  -webkit-text-shadow : $text-shadows
+  -moz-text-shadow : $text-shadows
+  -ms-text-shadow : $text-shadows
+  -o-text-shadow : $text-shadows
+  text-shadow : $text-shadows
+
+@mixin linear-gradient($deg, $start, $stop)
+  background-image : linear-gradient($deg, $start, $stop)
+  background-image : -webkit-linear-gradient($deg, $start, $stop)
+  background-image : -moz-linear-gradient($deg, $start, $stop)
+  background-image : -ms-linear-gradient($deg, $start, $stop)
+  background-image : -o-linear-gradient($deg, $start, $stop)
+
+@mixin hide-text
+  display : inline-block
+  overflow : hidden
+  text-indent : -1000em
+
+=transform($value)
+  -webkit-transform: ($value)
+  -moz-transform: ($value)
+  -ms-transform: ($value)
+  -o-transform: ($value)
+  transform: ($value)
+
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @-o-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+=animation($name:none, $duration:1s, $timing:ease, $delay:0s, $iteration:infinite, $direction:normal, $fill:both, $state:running)
+  -webkit-animation: $name $duration $timing $delay $iteration $direction $fill $state
+  -moz-animation: $name $duration $timing $delay $iteration $direction $fill $state
+  -ms-animation: $name $duration $timing $delay $iteration $direction $fill $state
+  -o-animation: $name $duration $timing $delay $iteration $direction $fill $state
+  animation: $name $duration $timing $delay $iteration $direction $fill $state
+
+// ----------------------------------------------------------------------------
+// Basic classes
+// ----------------------------------------------------------------------------
+
+body
+  font-family : Helvetica, Arial, sans-serif
+  font-size : 76%
+  text-rendering : optimizelegibility
+  -webkit-font-smoothing : antialiased
+iframe
+  border : none
+a img
+  display : block
+
+// ----------------------------------------------------------------------------
+// Structure
+// ----------------------------------------------------------------------------
+%block
+  +border-box
+  position : relative
+  display: block
+  width: 100%
+%centered
+  +border-box
+  margin : auto
+  position : relative
+  max-width : 1200px
+  text-align : left
+  @media only screen and (max-width : 1080px)
+    margin-left: 15px
+    margin-right: 15px
+  @media only screen and (max-width : 480px)
+    margin-left: 10px
+    margin-right: 10px
+%col1
+  +border-box
+  position: relative
+  display : inline-block
+  width : 100%
+  vertical-align: top
+%col2
+  +border-box
+  position: relative
+  display : inline-block
+  width : 48.5%
+  vertical-align: top
+  margin-left: 0
+  margin-right: 0
+  &:nth-of-type(odd)
+    margin-right : 1%
+    margin-left: 0
+  &:nth-of-type(even)
+    margin-right: 0
+    margin-left : 1%
+  @media only screen and (max-width : 640px)
+    &:nth-of-type(n)
+      width : 100%
+      margin-left: 0
+      margin-right: 0
+%col4
+  +border-box
+  position: relative
+  display : inline-block
+  width : 24%
+  vertical-align: top
+  &:nth-of-type(1n)
+    margin-left: 0
+    margin-right : 1%
+  &:nth-of-type(2n)
+    margin-left: 0
+    margin-right : .5%
+  &:nth-of-type(3n)
+    margin-left: .5%
+    margin-right : 0%
+  &:nth-of-type(4n)
+    margin-left: 1%
+    margin-right : 0
+  @media only screen and (max-width : 1080px)
+    width: 23.5%
+  @media only screen and (max-width : 800px)
+    width : 48.5%
+    margin-bottom: 20px
+    &:nth-of-type(odd)
+      margin-left: 0
+      margin-right : 1%
+    &:nth-of-type(even)
+      margin-left: 1%
+      margin-right : 0
+  @media only screen and (max-width : 640px)
+    &:nth-of-type(n)
+      width : 100%
+      margin-left: 0
+      margin-right: 0
+
+%reset
+  +border-box
+  margin: 0
+  padding: 0
+  border: 0
+
+%hide
+  display : none
+  visibility: none
+
+%ratio
+  position: relative
+  width: 100%
+  display: block
+  &.fourByThree
+    padding-bottom: 75%
+  &.sixteenByNine
+    padding-bottom: 56.25%
+  img, iframe, div
+    @extend reset
+    display: block
+    width: 100%
+    height: 100%
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+
+// ----------------------------------------------------------------------------
+// Colours and Buttons
+// ----------------------------------------------------------------------------
+
+body
+  background: black
+a
+  text-decoration : none
+  position : relative
+  &:hover
+    text-decoration : none
+
+// ----------------------------------------------------------------------------
+// Typography
+// ----------------------------------------------------------------------------
+
+h1,h2,h3,h4,h5,big,blockquote,.title
+  @extend %reset
+  position : relative
+  color: white
+h1
+  font-size: 2em
+  font-weight: 400
+h2
+  font-size: 1.5em
+  font-weight: 100
+h3
+  font-size: 4em
+  font-weight: 100
+  @media only screen and (max-width : 1000px)
+    font-size: 3em
+  @media only screen and (max-width : 600px)
+    font-size: 2em
+h4
+  font-size: 2.5em
+  font-weight: 100
+  @media only screen and (max-width : 1000px)
+    font-size: 2em
+  @media only screen and (max-width : 600px)
+    font-size: 1.5em
+h5
+  font-size: 2em
+  font-weight: 100
+p
+  font-size: 1.8em
+  line-height: 1.4em
+  font-weight: 300
+  color: white
+  @media only screen and (max-width : 1000px)
+    font-size: 1.5em
+  @media only screen and (max-width : 600px)
+    font-size: 1.2em
+strong
+  font-weight: 900
+ul,ol
+  color: white
+// ----------------------------------------------------------------------------
+// Animations
+// ----------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------
+// Global elements
+// ----------------------------------------------------------------------------
+
+header.global
+  nav
+    @extend %centered
+footer.global
+  nav
+    @extend %centered
+    padding: 100px 0
+    h3
+      margin: 30px 0
+    ul
+      @extend %col2
+      li
+        font-size: 2em
+        margin: 5px 0
+        @media only screen and (max-width : 1000px)
+          font-size: 1.5em
+        @media only screen and (max-width : 600px)
+          font-size: 1.2em
+
+// ----------------------------------------------------------------------------
+// Home
+// ----------------------------------------------------------------------------
+.home
+  section
+    @extend %block
+    padding: 30px
+    article
+      @extend %centered
+      h3,h4,p
+        margin: 30px 0
+      .btn
+        position: absolute
+        top: 0
+        right: 0
+        padding: 10px 20px
+        font-size: 2em
+        font-weight: 100
+        background: white
+        +border-radius(10px)
+        @media only screen and (max-width : 1000px)
+          font-size: 1.5em
+        @media only screen and (max-width : 600px)
+          font-size: 1.2em
+  .video
+    background: #000
+    .player
+      @extend %ratio
+      @extend .sixteenByNine
+      margin-bottom: 30px
+    ul
+      @extend %col1
+      li
+        @extend %col4
+        text-align: center
+        a
+          font-size: 2em
+          @media only screen and (max-width : 1000px)
+            font-size: 1.5em
+  .story
+    background: #222
+  .film
+    background: #444
+  .help
+    background: #666
+    ol
+      li
+        font-size: 2em
+        margin: 10px 0
+        @media only screen and (max-width : 1000px)
+          font-size: 1.5em
+  .donate
+    background: #888
